@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Zhanat Kim](https://up.htmlacademy.ru/javascript/28/user/2110603).
-* Наставник: [Дмитрий Гуляев] (https://htmlacademy.ru/profile/dima).
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
