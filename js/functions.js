@@ -44,3 +44,4 @@ function normalizeText(inputText, minLength, extraText) {
   return(extraText.slice(0, requiredLength % extraText.length) + extraText.repeat(requiredLength / extraText.length) + inputText);
 }
 normalizeText('qwerty', 4, '0');
+
