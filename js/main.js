@@ -73,4 +73,4 @@ const createPhotoContent = () => {
   };
   return createPhotoFile;
 };
-console.log(Array.from({length: 25}, createPhotoContent));
+Array.from({length: 25}, createPhotoContent);

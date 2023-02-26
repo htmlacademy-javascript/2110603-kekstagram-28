@@ -24,7 +24,7 @@ function getNumbers (input) {
   if (typeof(input) === 'number') {
     return(Math.abs(input));
   }
-  const numbers = parseInt(input.replace(/[\s.,%!]+/g, '').replace(/\D+/g, '').split('').join().replace(/[\s.,%!]+/g, ''));
+  const numbers = parseInt(input.replace(/[\s.,%!]+/g, '').replace(/\D+/g, '').split('').join().replace(/[\s.,%!]+/g, ''), 10);
   return(numbers);
 
 }
