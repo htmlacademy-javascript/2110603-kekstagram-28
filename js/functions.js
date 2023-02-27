@@ -24,7 +24,7 @@ function getNumbers (input) {
   if (typeof(input) === 'number') {
     return(Math.abs(input));
   }
-  const numbers = parseInt(input.replace(/[\s.,%!]+/g, '').replace(/\D+/g, '').split('').join().replace(/[\s.,%!]+/g, ''));
+  const numbers = parseInt(input.replace(/[\s.,%!]+/g, '').replace(/\D+/g, '').split('').join().replace(/[\s.,%!]+/g, ''), 10);
   return(numbers);
 
 }
@@ -44,3 +44,4 @@ function normalizeText(inputText, minLength, extraText) {
   return(extraText.slice(0, requiredLength % extraText.length) + extraText.repeat(requiredLength / extraText.length) + inputText);
 }
 normalizeText('qwerty', 4, '0');
+
