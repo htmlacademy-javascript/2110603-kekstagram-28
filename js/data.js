@@ -1,6 +1,6 @@
 import {getRandomInteger, createIdGenerator, getRandomElement} from './util.js';
 
-const PHOTO_MAX_COUNT = 25;
+const PHOTO_COUNT = 25;
 const COMMENTER_MAX_COUNT = 200;
 const COMMENTS_COUNT = 20;
 const AVATAR_MAX_COUNT = 6;
@@ -31,19 +31,20 @@ const COMMENTER_NAME_PATTERNS = [
   'Валли'
 ];
 
-const createPhotoId = createIdGenerator(1, PHOTO_MAX_COUNT);
-const createPhotoUrl = createIdGenerator(1, PHOTO_MAX_COUNT);
-const createPhotoIndex = createIdGenerator(1, PHOTO_MAX_COUNT);
-const createCommenterId = createIdGenerator(1, COMMENTER_MAX_COUNT);
+const createPhotoId = createIdGenerator();
+
+const createPhotoUrl = createIdGenerator();
+const createPhotoIndex = createIdGenerator();
+const createCommenterId = getRandomInteger(1, COMMENTER_MAX_COUNT);
 
 const createCommenter = () => ({
-  id: createCommenterId(),
+  id: createCommenterId,
   avatar: `img/avatar-${getRandomInteger(1, AVATAR_MAX_COUNT)}.svg`,
   message: getRandomElement(COMMENT_PATTERNS),
   name: getRandomElement(COMMENTER_NAME_PATTERNS)
 });
 
-const createPhotoContent = () => Array.from({length: PHOTO_MAX_COUNT},() => ({
+export const createPhotoContent = () => Array.from({length: PHOTO_COUNT}, () => ({
   id: createPhotoId(),
   url: `photos/${createPhotoUrl()}.jpg`,
   description: `Ваша загруженная фотография №${createPhotoIndex()}`,
@@ -51,5 +52,3 @@ const createPhotoContent = () => Array.from({length: PHOTO_MAX_COUNT},() => ({
   comments: Array.from({length: getRandomInteger(1, COMMENTS_COUNT)}, createCommenter)
 })
 );
-
-export {createPhotoContent};
