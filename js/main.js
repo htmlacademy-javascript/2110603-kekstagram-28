@@ -1,2 +1,2 @@
-import {createPhotoContent} from './data.js';
-createPhotoContent();
+import {createPhotoThumbnail} from './thumbnail.js';
+createPhotoThumbnail();
