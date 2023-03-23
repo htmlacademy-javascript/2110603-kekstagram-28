@@ -1,2 +1,5 @@
 import {createPhotoThumbnail} from './thumbnail.js';
-createPhotoThumbnail();
+import {showBigPhoto} from './gallery.js';
+import './modal.js';
+
+showBigPhoto(createPhotoThumbnail());
