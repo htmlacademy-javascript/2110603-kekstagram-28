@@ -1,6 +1,5 @@
 import {body} from './modal.js';
 import {pristine, hashtagInput, descriptionInput} from './validation.js';
-
 export const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('#upload-file');
 const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
@@ -33,13 +32,13 @@ export const openImgEditing = () => {
   imgUploadInput.addEventListener('change', () => {
     imgEditing.classList.remove('hidden');
     body.classList.add('modal-open');
+    imgUploadForm.querySelector('.img-upload__effect-level').classList.add('visually-hidden');
   });
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 export const submitForm = () => {
-  imgUploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  imgUploadForm.addEventListener('submit', () => {
     pristine.validate();
   });
 };
