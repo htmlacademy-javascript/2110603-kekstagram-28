@@ -18,10 +18,11 @@ export const createBigPhoto = ({url, description, likes, comments}) => {
 export const showBigPhoto = () => {
   photoContainer.addEventListener('click', (evt) => {
     const thumbnail = evt.target.closest('.picture');
-    const photo = gallery.find((item) => item.id === Number(thumbnail.id));
-
-    openModal();
-    createBigPhoto(photo);
-    createComments(photo.comments);
+    if (thumbnail) {
+      const photo = gallery.find((item) => item.id === Number(thumbnail.id));
+      openModal();
+      createBigPhoto(photo);
+      createComments(photo.comments);
+    }
   });
 };
