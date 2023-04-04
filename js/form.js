@@ -1,5 +1,7 @@
 import {body} from './modal.js';
 import {pristine, hashtagInput, descriptionInput} from './validation.js';
+import {setScale} from './scale.js';
+import {resetEffects} from './effects.js';
 export const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('#upload-file');
 const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
@@ -24,6 +26,7 @@ export const closeImgEditing = () => {
     body.classList.remove('modal-open');
     imgUploadForm.reset();
     pristine.reset();
+    resetEffects();
     document.removeEventListener('keydown', onImgEditingEscKeydown);
   });
 };
@@ -32,6 +35,7 @@ export const openImgEditing = () => {
   imgUploadInput.addEventListener('change', () => {
     imgEditing.classList.remove('hidden');
     body.classList.add('modal-open');
+    setScale();
     imgUploadForm.querySelector('.img-upload__effect-level').classList.add('visually-hidden');
   });
   document.addEventListener('keydown', onImgEditingEscKeydown);
