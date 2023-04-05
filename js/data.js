@@ -1,54 +1,25 @@
-import {getRandomInteger, createIdGenerator, getRandomElement} from './util.js';
+import {createPhotoThumbnails} from './thumbnail.js';
+import {showBigPhoto} from './big-photo.js';
+import {closeImgEditing} from './form.js';
+import {getData, sendData} from './api.js';
+import {showGettingAlert, showSendingSuccessMessage, showSendingErrorMessage} from './alert-messages.js';
 
-const PHOTO_COUNT = 25;
-const COMMENTER_MAX_COUNT = 200;
-const COMMENTS_COUNT = 20;
-const AVATAR_MAX_COUNT = 6;
-const LIKES_MIN_COUNT = 15;
-const LIKES_MAX_COUNT = 200;
-const COMMENT_PATTERNS = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
+export const checkIngoingData = async () => {
+  try {
+    const gallery = await getData();
+    createPhotoThumbnails(gallery);
+    showBigPhoto(gallery);
+  } catch (error) {
+    showGettingAlert(error.message);
+  }
+};
 
-const COMMENTER_NAME_PATTERNS = [
-  'Гарфилд',
-  'Том',
-  'Гудвин',
-  'Рокки',
-  'Пушок',
-  'Бегемот',
-  'Альбус',
-  'Базилио',
-  'Леопольд',
-  'Нарцисс',
-  'Атос',
-  'Каспер',
-  'Валли'
-];
-
-const createPhotoId = createIdGenerator();
-
-const createPhotoUrl = createIdGenerator();
-const createPhotoIndex = createIdGenerator();
-const createCommenterId = getRandomInteger(1, COMMENTER_MAX_COUNT);
-
-const createCommenter = () => ({
-  id: createCommenterId,
-  avatar: `img/avatar-${getRandomInteger(1, AVATAR_MAX_COUNT)}.svg`,
-  message: getRandomElement(COMMENT_PATTERNS),
-  name: getRandomElement(COMMENTER_NAME_PATTERNS)
-});
-
-export const createPhotoContent = () => Array.from({length: PHOTO_COUNT}, () => ({
-  id: createPhotoId(),
-  url: `photos/${createPhotoUrl()}.jpg`,
-  description: `Ваша загруженная фотография №${createPhotoIndex()}`,
-  likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
-  comments: Array.from({length: getRandomInteger(1, COMMENTS_COUNT)}, createCommenter)
-})
-);
+export const checkOutgoingData = async (data) => {
+  try {
+    await sendData(data);
+    closeImgEditing();
+    showSendingSuccessMessage();
+  } catch {
+    showSendingErrorMessage();
+  }
+};

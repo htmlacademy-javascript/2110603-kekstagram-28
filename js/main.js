@@ -1,9 +1,7 @@
-import {createPhotoThumbnail} from './thumbnail.js';
-import {showBigPhoto} from './big-photo.js';
-import {closeImgEditing, openImgEditing, submitForm} from './form.js';
 
-showBigPhoto();
-createPhotoThumbnail();
-openImgEditing();
-closeImgEditing();
-submitForm();
+import {submitForm} from './form.js';
+import { checkIngoingData, checkOutgoingData } from './data.js';
+import './filter.js';
+
+checkIngoingData();
+submitForm(checkOutgoingData);

@@ -3,7 +3,7 @@ export const bigPhoto = document.querySelector('.big-picture');
 const bigPhotoCancelButton = bigPhoto.querySelector('.big-picture__cancel');
 
 const onModalEscKeydown = (evt) => {
-  if(evt.key === 'Escape') {
+  if(evt.key === 'Escape' && bigPhoto.className !== 'hidden') {
     evt.preventDefault();
     bigPhoto.classList.add('hidden');
     body.classList.remove('modal-open');

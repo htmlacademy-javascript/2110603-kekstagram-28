@@ -15,3 +15,29 @@ export const createIdGenerator = () => {
 
 export const getRandomElement = (someArray) =>
   someArray[getRandomInteger(0, someArray.length - 1)];
+
+
+// export const getRandomUniqueArray = (arr, number) => {
+//   const newArr = [];
+//   while (newArr.length === number) {
+//     const a = getRandomElement(arr);
+//     if (!newArr.includes(a)) {
+//       newArr.push(a);
+//       newArr.length += 1;
+//       console.log(newArr);
+//     }
+//   }
+//   return newArr;
+// };
+
+
+export const getRandomUniqueArray = (arr,length) => {
+  const newArr = [];
+  for (let i = 0; i < length; i++) {
+    const a = getRandomElement(arr);
+    if (!newArr.includes(a)) {
+      newArr.push(a);
+    }
+  }
+  return newArr;
+};

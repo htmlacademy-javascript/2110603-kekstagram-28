@@ -1,4 +1,4 @@
-import {gallery, photoContainer} from './thumbnail.js';
+import {photoContainer} from './thumbnail.js';
 import {bigPhoto, openModal} from './modal.js';
 import {createComments} from './comments.js';
 
@@ -15,7 +15,7 @@ export const createBigPhoto = ({url, description, likes, comments}) => {
   bigPhotoCommentsCount.textContent = comments.length;
 };
 
-export const showBigPhoto = () => {
+export const showBigPhoto = (gallery) => {
   photoContainer.addEventListener('click', (evt) => {
     const thumbnail = evt.target.closest('.picture');
     if (thumbnail) {
