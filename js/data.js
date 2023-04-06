@@ -8,7 +8,7 @@ import {init, createSortedGallery} from './filter.js';
 export const checkIngoingData = async () => {
   try {
     const loadedGallery = await getData();
-    init(loadedGallery);
+    init(loadedGallery, createPhotoThumbnails);
     createPhotoThumbnails(createSortedGallery());
     showBigPhoto(createSortedGallery());
   } catch (error) {

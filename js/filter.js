@@ -17,7 +17,7 @@ export const createSortedGallery = () => {
   }
 };
 
-const setOnFiltersClick = () => {
+const setOnFiltersClick = (cb) => {
   filtersButtonContainer.addEventListener('click', (evt) => {
     for (let i = 0; i < filtersButtonContainer.children.length; i++) {
       filtersButtonContainer.children[i].classList.remove('img-filters__button--active');
@@ -26,11 +26,12 @@ const setOnFiltersClick = () => {
     currentFilter = evt.target.id;
     // console.log(evt.target);
     // console.log(currentFilter);
-    createSortedGallery();
+    cb(createSortedGallery());
+
   });
 };
 
-export const init = (loadedGallery) => {
+export const init = (loadedGallery, cb) => {
   photos = [...loadedGallery];
-  setOnFiltersClick();
+  setOnFiltersClick(cb);
 };

@@ -16,6 +16,7 @@ export const createPhotoThumbnails = (gallery) => {
   gallery.forEach((thumbnail) => {
     photoContentFragment.appendChild(createThumbnail(thumbnail));
   });
+  photoContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
   photoContainer.appendChild(photoContentFragment);
   filters.classList.remove('img-filters--inactive');
 };
