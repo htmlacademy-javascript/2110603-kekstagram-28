@@ -4,8 +4,6 @@ const ALERT_SHOW_TIME = 5000;
 const errorMessageTemplate = document.querySelector('#error').content;
 const successMessageTemplate = document.querySelector('#success').content;
 const messageContainer = document.querySelector('body');
-//  const closeErrorButton = document.querySelector('.error__button');
-// const closeSuccessButton = document.querySelector('.success__button');
 const messageFragment = document.createDocumentFragment();
 
 const onMessageEscKeydown = (evt) => {
@@ -13,25 +11,23 @@ const onMessageEscKeydown = (evt) => {
     evt.preventDefault();
     messageContainer.removeChild(messageContainer.lastChild);
   }
+  document.addEventListener('keydown', onImgEditingEscKeydown);
 };
-const onButtonCloseMessage = () => {
+const onClickCloseMessage = () => {
   messageContainer.removeChild(messageContainer.lastChild);
+  document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
-// const onDocumentCloseMessage = (evt) => {
-//   if(!evt.target.closest('.success__inner') || !evt.target.closest('.error__inner')) {
-//     messageContainer.removeChild(messageContainer.lastChild);
-//   }
-// };
 const createMessage = (template, type) => {
-  const clone = template.cloneNode(true);
-  clone.querySelector(`.${type}__button`).addEventListener('click', onButtonCloseMessage);
   document.removeEventListener('keydown', onImgEditingEscKeydown);
+  const clone = template.cloneNode(true);
+  clone.querySelector(`.${type}__button`).addEventListener('click', onClickCloseMessage);
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', (evt) => {
     if(!evt.target.closest(`.${type}__inner`)) {
-      messageContainer.removeChild(messageContainer.lastChild);
+      onClickCloseMessage();
     }
+    document.addEventListener('keydown', onImgEditingEscKeydown);
   });
 
   messageFragment.appendChild(clone);
@@ -39,13 +35,9 @@ const createMessage = (template, type) => {
 };
 export const showSendingSuccessMessage = () => {
   createMessage(successMessageTemplate, 'success');
-  // document.addEventListener('keydown', onModalEscKeydown);
-  // messageContainer .addEventListener('click', closeMessage);
 };
 export const showSendingErrorMessage = () => {
   createMessage(errorMessageTemplate, 'error');
-  // document.addEventListener('keydown', onModalEscKeydown);
-  // messageContainer.addEventListener('click', closeMessage);
 };
 
 export const showGettingAlert = (message) => {
@@ -69,22 +61,3 @@ export const showGettingAlert = (message) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
-
-// <!-- Сообщение об успешной загрузке изображения -->
-// <template id="success">
-//   <section class="success">
-//     <div class="success__inner">
-//       <h2 class="success__title">Изображение успешно загружено</h2>
-//       <button type="button" class="success__button">Круто!</button>
-//     </div>
-//   </section>
-// </template>
-
-// const createMessage = () => {
-//   const messageTemplateClone = errorMessageTemplate.cloneNode(true);
-//   errorMessageTemplate.querySelector('.error__title')
-//     .textContent = 'Произошла ошибка. Попробуйте перезагрузить страницу';
-//   errorMessageTemplate.querySelector('.error__button').addEventListener('click', reloadPage);
-//   messageFragment.appendChild(messageTemplateClone);
-//   photoContainer.appendChild(messageFragment);
-// };

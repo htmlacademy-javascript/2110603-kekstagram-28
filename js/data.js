@@ -3,12 +3,14 @@ import {showBigPhoto} from './big-photo.js';
 import {closeImgEditing} from './form.js';
 import {getData, sendData} from './api.js';
 import {showGettingAlert, showSendingSuccessMessage, showSendingErrorMessage} from './alert-messages.js';
+import {init, createSortedGallery} from './filter.js';
 
 export const checkIngoingData = async () => {
   try {
-    const gallery = await getData();
-    createPhotoThumbnails(gallery);
-    showBigPhoto(gallery);
+    const loadedGallery = await getData();
+    init(loadedGallery);
+    createPhotoThumbnails(createSortedGallery());
+    showBigPhoto(createSortedGallery());
   } catch (error) {
     showGettingAlert(error.message);
   }
