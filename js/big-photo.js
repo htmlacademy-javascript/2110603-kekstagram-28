@@ -7,7 +7,7 @@ const bigPhotolikesCount = bigPhoto.querySelector('.likes-count');
 const bigPhotoCommentsCount = bigPhoto.querySelector('.comments-count');
 const bigPhotoCaption = bigPhoto.querySelector('.social__caption');
 
-export const createBigPhoto = ({url, description, likes, comments}) => {
+const createBigPhoto = ({url, description, likes, comments}) => {
   bigPhotoItem.src = url;
   bigPhotoItem.alt = description;
   bigPhotolikesCount.textContent = likes;
