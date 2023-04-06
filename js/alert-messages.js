@@ -10,21 +10,21 @@ const onEscCloseMessage = (evt) => {
   if(evt.key === 'Escape') {
     evt.preventDefault();
     messageContainer.removeChild(messageContainer.lastChild);
-    evt.stopPropagation();
   }
-  // document.addEventListener('keydown', onImgEditingEscKeydown);
+  document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const onWindowCloseMessage = (evt) => {
   if(!evt.target.closest('.success__inner') || !evt.target.closest('.error__inner')) {
     messageContainer.removeChild(messageContainer.lastChild);
   }
+  document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const closeMessage = () => {
   messageContainer.removeChild(messageContainer.lastChild);
   document.removeEventListener('keydown', onEscCloseMessage);
-  document.removeEventListener('click', onWindowCloseMessage);
+  messageContainer.removeEventListener('click', onWindowCloseMessage);
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
@@ -47,7 +47,7 @@ export const showSendingErrorMessage = () => {
 };
 
 document.addEventListener('keydown', onEscCloseMessage);
-document.addEventListener('click', onWindowCloseMessage);
+messageContainer.addEventListener('click', onWindowCloseMessage);
 
 
 export const showGettingAlert = (message) => {
