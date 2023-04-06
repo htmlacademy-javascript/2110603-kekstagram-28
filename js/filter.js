@@ -9,7 +9,6 @@ const commentsSort = (photoA, photoB) => photoB.comments.length - photoA.comment
 
 export const createSortedGallery = () => {
   if (currentFilter === 'filter-random') {
-    console.log(currentFilter);
     return photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT);
   }else if(currentFilter === 'filter-discussed') {
     return photos.slice().sort(commentsSort);
@@ -33,6 +32,5 @@ const setOnFiltersClick = () => {
 
 export const init = (loadedGallery) => {
   photos = [...loadedGallery];
-  console.log(photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT));
   setOnFiltersClick();
 };
