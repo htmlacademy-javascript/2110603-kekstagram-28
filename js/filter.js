@@ -24,10 +24,7 @@ const setOnFiltersClick = (cb) => {
     }
     evt.target.classList.add('img-filters__button--active');
     currentFilter = evt.target.id;
-    // console.log(evt.target);
-    // console.log(currentFilter);
     cb(createSortedGallery());
-
   });
 };
 

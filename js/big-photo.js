@@ -1,6 +1,6 @@
 import {photoContainer} from './thumbnail.js';
 import {bigPhoto, openModal} from './modal.js';
-import {createComments} from './comments.js';
+import {createCommentsList} from './comments.js';
 
 const bigPhotoItem = bigPhoto.querySelector('.big-picture__img img');
 const bigPhotolikesCount = bigPhoto.querySelector('.likes-count');
@@ -22,7 +22,7 @@ export const showBigPhoto = (gallery) => {
       const photo = gallery.find((item) => item.id === Number(thumbnail.id));
       openModal();
       createBigPhoto(photo);
-      createComments(photo.comments);
+      createCommentsList(photo.comments);
     }
   });
 };
