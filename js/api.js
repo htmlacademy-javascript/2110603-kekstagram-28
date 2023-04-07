@@ -1,9 +1,10 @@
-import {createPhotoThumbnails} from './thumbnail.js';
-import {showBigPhoto} from './big-photo.js';
-import {closeImgEditing} from './form.js';
-import {showGettingAlert, showSendingSuccessMessage, showSendingErrorMessage} from './alert-messages.js';
-import {init, createSortedGallery} from './filter.js';
-
+import { createPhotoThumbnails } from './thumbnail.js';
+import { showBigPhoto } from './big-photo.js';
+import { closeImgEditing } from './form.js';
+import { showGettingAlert, showSendingSuccessMessage, showSendingErrorMessage } from './alert-messages.js';
+import { init, createSortedGallery } from './filter.js';
+import { debounce } from './util.js';
+const RERENDER_DELAY = 500;
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const Route = {
@@ -22,7 +23,7 @@ export const getData = () =>
       return response.json();
     })
     .then((data) => {
-      init(data, createPhotoThumbnails);
+      init(data, debounce(createPhotoThumbnails, RERENDER_DELAY));
       createPhotoThumbnails(createSortedGallery());
       showBigPhoto(createSortedGallery());
     })

@@ -18,3 +18,10 @@ export const getRandomElement = (someArray) =>
 
 export const randomSort = () => Math.random() - 0.5;
 
+export const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};

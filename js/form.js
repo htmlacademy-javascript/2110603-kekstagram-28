@@ -1,18 +1,28 @@
-import {body} from './modal.js';
-import {pristine, hashtagInput, descriptionInput} from './validation.js';
-import {setScale} from './scale.js';
-import {resetEffects} from './effects.js';
+import { body } from './modal.js';
+import { pristine, hashtagInput, descriptionInput } from './validation.js';
+import { setScale } from './scale.js';
+import { resetEffects } from './effects.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 export const imgUploadForm = document.querySelector('.img-upload__form');
-const imgUploadInput = imgUploadForm.querySelector('#upload-file');
+const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('#upload-cancel');
 const submitButton = imgUploadForm.querySelector('.img-upload__submit');
+const preview = imgUploadForm.querySelector('.img-upload__preview img');
 
 const isTextInputActive = () =>
   document.activeElement === hashtagInput ||
   document.activeElement === descriptionInput;
 
+const setImgPreview = () => {
+  const file = imgUploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((element) => fileName.endsWith(element));
+  if(matches) {
+    preview.src = URL.createObjectURL(file);
+  }
+};
 
 export const onImgEditingEscKeydown = (evt) => {
   if(evt.key === 'Escape' && !isTextInputActive()) {
@@ -38,6 +48,7 @@ export const openImgEditing = () => {
   setScale();
   imgUploadForm.querySelector('.img-upload__effect-level').classList.add('visually-hidden');
   document.addEventListener('keydown', onImgEditingEscKeydown);
+  setImgPreview();
 };
 
 const blockSubmitButton = () => {
@@ -60,7 +71,5 @@ export const submitForm = (cb) => {
   });
 };
 
-
-imgUploadInput.addEventListener('change', openImgEditing);
-
 imgUploadCancel.addEventListener('click', closeImgEditing);
+imgUploadInput.addEventListener('change', openImgEditing);

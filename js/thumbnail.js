@@ -21,24 +21,3 @@ export const createPhotoThumbnails = (gallery) => {
   filters.classList.remove('img-filters--inactive');
 };
 
-// export const createPhotoThumbnails = (gallery) => {
-//   createRandomGallery(gallery.slice())
-//     .forEach((thumbnail) => {
-//       photoContentFragment.appendChild(createThumbnail(thumbnail));
-//     });
-//   photoContainer.appendChild(photoContentFragment);
-//   filters.classList.remove('img-filters--inactive');
-// };
-
-// export const createPhotoThumbnails = (gallery) => {
-//   const newGallery = gallery.slice();
-//   createSortedGallery(newGallery);
-//   newGallery
-//     .forEach((thumbnail) => {
-//       photoContentFragment.appendChild(createThumbnail(thumbnail));
-//     });
-//   photoContainer.appendChild(photoContentFragment);
-//   filters.classList.remove('img-filters--inactive');
-//   console.log(gallery);
-//   console.log(newGallery);
-// };
