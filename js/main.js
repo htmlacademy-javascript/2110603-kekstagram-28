@@ -1,6 +1,8 @@
 
 import {submitForm} from './form.js';
-import { checkIngoingData, checkOutgoingData } from './data.js';
-
-checkIngoingData();
-submitForm(checkOutgoingData);
+// import { checkIngoingData, checkOutgoingData } from './data.js';
+import { sendData, getData } from './api.js';
+// checkIngoingData();
+// submitForm(checkOutgoingData);
+submitForm(sendData);
+getData();

@@ -9,13 +9,10 @@ const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('#upload-cancel');
 const submitButton = imgUploadForm.querySelector('.img-upload__submit');
 
-
 const isTextInputActive = () =>
   document.activeElement === hashtagInput ||
   document.activeElement === descriptionInput;
 
-// const isImgEditingActive = () =>
-//   document.activeElement === imgEditing;
 
 export const onImgEditingEscKeydown = (evt) => {
   if(evt.key === 'Escape' && !isTextInputActive()) {
@@ -54,8 +51,7 @@ const unblockSubmitButton = () => {
 export const submitForm = (cb) => {
   imgUploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
+    if (pristine.validate()) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
       await cb(formData);
@@ -64,34 +60,7 @@ export const submitForm = (cb) => {
   });
 };
 
+
 imgUploadInput.addEventListener('change', openImgEditing);
 
 imgUploadCancel.addEventListener('click', closeImgEditing);
-
-// const setUserFormSubmit = (onSuccess) => {
-//   wizardForm.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-
-//     const isValid = pristine.validate();
-//     if (isValid) {
-//       blockSubmitButton();
-//       sendData(new FormData(evt.target))
-//         .then(onSuccess)
-//         .catch(
-//           (err) => {
-//             showAlert(err.message);
-//           }
-//         )
-//         .finally(unblockSubmitButton);
-//     }
-//   });
-// };
-
-
-//setUserFormSubmit(closeUserModal);
-
-
-// function closeUserModal () {
-//   userModalElement.classList.add('hidden');
-//   document.removeEventListener('keydown', onDocumentKeydown);
-// }

@@ -1,3 +1,9 @@
+import {createPhotoThumbnails} from './thumbnail.js';
+import {showBigPhoto} from './big-photo.js';
+import {closeImgEditing} from './form.js';
+import {showGettingAlert, showSendingSuccessMessage, showSendingErrorMessage} from './alert-messages.js';
+import {init, createSortedGallery} from './filter.js';
+
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const Route = {
@@ -5,28 +11,36 @@ const Route = {
   SEND_DATA: '/',
 };
 
-const Method = {
-  GET: 'GET',
-  POST: 'POST',
-};
+const ERROR_TEXT = 'Не удалось загрузить данные. Попробуйте обновить страницу';
 
-const ErrorText = {
-  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
-  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
-};
-
-const load = (route, errorText, method = Method.GET, body = null) =>
-  fetch(`${BASE_URL}${route}`, {method, body})
+export const getData = () =>
+  fetch(`${BASE_URL}${Route.GET_DATA}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error();
       }
       return response.json();
     })
+    .then((data) => {
+      init(data, createPhotoThumbnails);
+      createPhotoThumbnails(createSortedGallery());
+      showBigPhoto(createSortedGallery());
+    })
     .catch(() => {
-      throw new Error(errorText);
+      showGettingAlert(ERROR_TEXT);
     });
 
-export const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
+export const sendData = (body) =>
+  fetch(`${BASE_URL}${Route.SEND_DATA}`, {method:'POST', body})
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error();
+      }
+      closeImgEditing();
+      showSendingSuccessMessage();
+      return response.json();
+    })
+    .catch(() => {
+      showSendingErrorMessage();
+    });
 
-export const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);

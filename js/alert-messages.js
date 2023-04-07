@@ -4,44 +4,40 @@ const ALERT_SHOW_TIME = 5000;
 const errorMessageTemplate = document.querySelector('#error').content;
 const successMessageTemplate = document.querySelector('#success').content;
 const messageContainer = document.querySelector('body');
-const messageFragment = document.createDocumentFragment();
+// const messageFragment = document.createDocumentFragment();
 
 const isCorrectTarget = (evt) => !evt.target.closest('.success__inner') || !evt.target.closest('.error__inner');
 
 const onDocumentKeydown = (evt) => {
   if(evt.key === 'Escape') {
     evt.preventDefault();
-    messageContainer.removeChild(messageContainer.lastChild);
+    messageContainer.lastChild.remove();
   }
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const onDocumentClick = (evt) => {
   if(isCorrectTarget(evt)) {
-    messageContainer.removeChild(messageContainer.lastChild);
+    messageContainer.lastChild.remove();
   }
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const closeMessage = () => {
-  messageContainer.removeChild(messageContainer.lastChild);
-
+  messageContainer.lastChild.remove();
+  // console.log(messageContainer.lastChild);
   document.removeEventListener('keydown', onDocumentKeydown);
   document.removeEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const createMessage = (template, type) => {
+  const message = template.cloneNode(true);
+  message.querySelector(`.${type}__button`).addEventListener('click', closeMessage);
+  messageContainer.append(message);
   document.removeEventListener('keydown', onImgEditingEscKeydown);
-
-  const clone = template.cloneNode(true);
-
-  clone.querySelector(`.${type}__button`).addEventListener('click', closeMessage);
   document.addEventListener('keydown', onDocumentKeydown);
   document.addEventListener('click', onDocumentClick);
-
-  messageFragment.appendChild(clone);
-  messageContainer.appendChild(messageFragment);
 };
 
 export const showSendingSuccessMessage = () => {
