@@ -12,6 +12,7 @@ const onDocumentKeydown = (evt) => {
   if(evt.key === 'Escape') {
     evt.preventDefault();
     messageContainer.lastChild.remove();
+    // console.log(evt.target);
   }
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
@@ -19,13 +20,15 @@ const onDocumentKeydown = (evt) => {
 const onDocumentClick = (evt) => {
   if(isCorrectTarget(evt)) {
     messageContainer.lastChild.remove();
+    // console.log(evt.target);
+    // console.log(evt.target);
   }
   document.addEventListener('keydown', onImgEditingEscKeydown);
 };
 
 const closeMessage = () => {
   messageContainer.lastChild.remove();
-  // console.log(messageContainer.lastChild);
+  // console.log(evt.target);
   document.removeEventListener('keydown', onDocumentKeydown);
   document.removeEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onImgEditingEscKeydown);
@@ -34,7 +37,7 @@ const closeMessage = () => {
 const createMessage = (template, type) => {
   const message = template.cloneNode(true);
   message.querySelector(`.${type}__button`).addEventListener('click', closeMessage);
-  messageContainer.append(message);
+  messageContainer.appendChild(message);
   document.removeEventListener('keydown', onImgEditingEscKeydown);
   document.addEventListener('keydown', onDocumentKeydown);
   document.addEventListener('click', onDocumentClick);
