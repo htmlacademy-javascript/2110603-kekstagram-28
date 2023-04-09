@@ -11,7 +11,7 @@ const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/hgf',
+  SEND_DATA: '/',
 };
 
 const ERROR_TEXT = 'Не удалось загрузить данные. Попробуйте обновить страницу';
