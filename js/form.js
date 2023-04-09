@@ -2,8 +2,9 @@ import { body } from './modal.js';
 import { pristine, hashtagInput, descriptionInput } from './validation.js';
 import { setScale } from './scale.js';
 import { resetEffects } from './effects.js';
-import { showSendingSuccessMessage } from './alert-messages.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 export const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
@@ -39,7 +40,6 @@ export const closeImgEditing = () => {
   imgUploadForm.reset();
   pristine.reset();
   resetEffects();
-  showSendingSuccessMessage();
   document.removeEventListener('keydown', onImgEditingEscKeydown);
 };
 
@@ -60,17 +60,19 @@ export const unblockSubmitButton = () => {
   submitButton.disabled = false;
 };
 
-// export const submitForm = (cb) => {
-//   imgUploadForm.addEventListener('submit', async (evt) => {
-//     evt.preventDefault();
-//     if (pristine.validate()) {
-//       blockSubmitButton();
-//       const formData = new FormData(evt.target);
-//       await cb(formData);
-//       unblockSubmitButton();
-//     }
-//   });
-// };
+export const submitForm = (cb) => {
+  imgUploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    if (pristine.validate()) {
+      blockSubmitButton();
+      const formData = new FormData(evt.target);
+      await cb(formData);
+      unblockSubmitButton();
+    }
+  });
+};
 
 imgUploadCancel.addEventListener('click', closeImgEditing);
 imgUploadInput.addEventListener('change', openImgEditing);
+
+

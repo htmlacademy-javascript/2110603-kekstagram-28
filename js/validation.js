@@ -1,4 +1,3 @@
-// Валидация полей ввода хэштгов и комментария
 const MAX_HASHTAG_COUNT = 5;
 const MAX_HASHTAG_LENGTH = 20;
 const MIN_HASHTAG_LENGTH = 1;
@@ -24,7 +23,6 @@ export const pristine = new Pristine(imgUploadForm, {
   errorClass: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'p',
-  errorTextClass: 'text__help',
 });
 
 const getHashtags = (str) => str.trim().split(' ');
@@ -71,4 +69,3 @@ pristine.addValidator(hashtagInput, isValidHashtagsCount, ERROR_MESSAGES[3]);
 pristine.addValidator(descriptionInput, isValidDescription, ERROR_MESSAGES[4]);
 pristine.addValidator(hashtagInput, isHashtagHasHash, ERROR_MESSAGES[5]);
 pristine.addValidator(hashtagInput, isHashtagNotShort, ERROR_MESSAGES[6]);
-

@@ -1,4 +1,3 @@
-// Scale
 const SCALE_STEP = 25;
 const SCALE_MAX = 100;
 const SCALE_MIN = 25;
@@ -26,6 +25,7 @@ const onBiggerButtonClick = () => {
   scaleValue.value = `${newValue}%`;
   imgPreview.style.transform = `scale(${newValue / 100})`;
 };
+
 export const setScale = () => {
   scaleValue.value = `${SCALE_DEFAULT}%`;
   smallerButton.addEventListener('click', onSmallerButtonClick);

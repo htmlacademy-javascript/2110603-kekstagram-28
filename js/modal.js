@@ -23,7 +23,7 @@ export const openModal = () => {
   bigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
-  bigPhotoCancelButton.addEventListener('click', closeModal);
 };
 
 
+bigPhotoCancelButton.addEventListener('click', closeModal);

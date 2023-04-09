@@ -1,6 +1,5 @@
+import { submitForm } from './form.js';
+import { sendData, getData } from './api.js';
 
-// import { closeImgEditing } from './form.js';
-import { submitForm, getData } from './api.js';
-
-submitForm();
+submitForm(sendData);
 getData();
