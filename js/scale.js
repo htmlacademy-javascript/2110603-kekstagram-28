@@ -8,23 +8,23 @@ const biggerButton = scaleControl.querySelector('.scale__control--bigger');
 const scaleValue = scaleControl.querySelector('.scale__control--value');
 const imgPreview = document.querySelector('.img-upload__preview img');
 
-const onSmallerButtonClick = () => {
+function onSmallerButtonClick () {
   let newValue = parseInt(scaleValue.value, 10) - SCALE_STEP;
   if (newValue < SCALE_MIN) {
     newValue = SCALE_MIN;
   }
   scaleValue.value = `${newValue}%`;
   imgPreview.style.transform = `scale(${newValue / 100})`;
-};
+}
 
-const onBiggerButtonClick = () => {
+function onBiggerButtonClick () {
   let newValue = parseInt(scaleValue.value, 10) + SCALE_STEP;
   if (newValue > SCALE_MAX) {
     newValue = SCALE_MAX;
   }
   scaleValue.value = `${newValue}%`;
   imgPreview.style.transform = `scale(${newValue / 100})`;
-};
+}
 
 export const setScale = () => {
   scaleValue.value = `${SCALE_DEFAULT}%`;

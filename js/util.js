@@ -28,7 +28,9 @@ export const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export const showGettingAlert = (message) => {
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export function showGettingAlert (message) {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -48,4 +50,4 @@ export const showGettingAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
+}

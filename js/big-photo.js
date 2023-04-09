@@ -1,5 +1,5 @@
 import {photoContainer} from './thumbnail.js';
-import {bigPhoto, openModal} from './modal.js';
+import {bigPhoto, openModal} from './big-photo-modal.js';
 import {createCommentsList} from './comments.js';
 
 const bigPhotoItem = bigPhoto.querySelector('.big-picture__img img');

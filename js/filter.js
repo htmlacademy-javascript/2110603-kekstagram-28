@@ -5,13 +5,13 @@ let photos = [];
 
 const randomSort = () => Math.random() - 0.5;
 
-const commentsSort = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
+const byCommentsSort = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
-export const createSortedGallery = () => {
+export const getSortedGallery = () => {
   if (currentFilter === 'filter-random') {
     return photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT);
   }else if(currentFilter === 'filter-discussed') {
-    return photos.slice().sort(commentsSort);
+    return photos.slice().sort(byCommentsSort);
   } else {
     return photos;
   }
@@ -24,11 +24,11 @@ const setOnFiltersClick = (cb) => {
     }
     evt.target.classList.add('img-filters__button--active');
     currentFilter = evt.target.id;
-    cb(createSortedGallery());
+    cb(getSortedGallery());
   });
 };
 
-export const init = (loadedGallery, cb) => {
+export const init = (loadedGallery, createGallery) => {
   photos = [...loadedGallery];
-  setOnFiltersClick(cb);
+  setOnFiltersClick(createGallery);
 };

@@ -1,4 +1,5 @@
-import {onImgEditingEscKeydown} from './form.js';
+import { onDocumentKeydown } from './form.js';
+import { isEscapeKey } from './util.js';
 
 const errorMessageTemplate = document.querySelector('#error').content;
 const successMessageTemplate = document.querySelector('#success').content;
@@ -7,62 +8,61 @@ const messageContainer = document.querySelector('body');
 // Success
 
 const onDocumentKeydownSuccess = (evt) => {
-  if(evt.key === 'Escape') {
+  if(isEscapeKey) {
     evt.preventDefault();
-    document.querySelector('.success').remove();
+    closeSuccessMessage();
   }
 };
 
 const onSuccessOutsideClick = (evt) => {
   if(!evt.target.closest('.success__inner')) {
-    document.querySelector('.success').remove();
+    closeSuccessMessage();
   }
 };
 
-const onButtoncloseMessage = () => {
+function closeSuccessMessage () {
   document.querySelector('.success').remove();
   document.removeEventListener('keydown', onDocumentKeydownSuccess);
-  document.addEventListener('keydown', onImgEditingEscKeydown);
-};
+}
 
 // Error
 
 const onDocumentKeydownError = (evt) => {
-  if(evt.key === 'Escape') {
+  if(isEscapeKey) {
     evt.preventDefault();
-    document.querySelector('.error').remove();
+    closeErrorMessage();
   }
 };
 
 const onErrorOutsideClick = (evt) => {
   if(!evt.target.closest('.error__inner')) {
-    document.querySelector('.error').remove();
+    closeErrorMessage();
   }
 };
 
-const onButtoncloseMessageError = () => {
+function closeErrorMessage () {
+  document.addEventListener('keydown', onDocumentKeydown);
   document.querySelector('.error').remove();
   document.removeEventListener('keydown', onDocumentKeydownError);
-  document.addEventListener('keydown', onImgEditingEscKeydown);
-};
+}
 
-const openMessage = (template, type) => {
-  document.removeEventListener('keydown', onImgEditingEscKeydown);
+function openMessage (template, type) {
+  document.removeEventListener('keydown', onDocumentKeydown);
   const message = template.cloneNode(true);
   messageContainer.appendChild(message);
   switch(type) {
     case 'success':
       document.querySelector(`.${type}`).addEventListener('click', onSuccessOutsideClick);
-      document.querySelector(`.${type}__button`).addEventListener('click', onButtoncloseMessage);
+      document.querySelector(`.${type}__button`).addEventListener('click', closeSuccessMessage);
       document.addEventListener('keydown', onDocumentKeydownSuccess);
       break;
     case 'error':
       document.querySelector(`.${type}`).addEventListener('click', onErrorOutsideClick);
-      document.querySelector(`.${type}__button`).addEventListener('click', onButtoncloseMessageError);
+      document.querySelector(`.${type}__button`).addEventListener('click', closeErrorMessage);
       document.addEventListener('keydown', onDocumentKeydownError);
       break;
   }
-};
+}
 
 export const openSuccessMessage = () => openMessage(successMessageTemplate, 'success');
 

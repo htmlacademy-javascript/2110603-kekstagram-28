@@ -18,7 +18,7 @@ const createComment = ({avatar, name, message}) => {
   return commentTemplateClone;
 };
 
-const loadMoreComments = () => {
+const loadComments = () => {
   loadedCommentsCount += COMMENTS_COUNT_AT_ONCE;
 
   if (loadedCommentsCount >= comments.length) {
@@ -39,10 +39,10 @@ const loadMoreComments = () => {
 
 export const createCommentsList = (photoComments) => {
   comments = photoComments;
-  loadMoreComments();
+  loadComments();
 };
 
-commentsLoadButton.addEventListener('click', loadMoreComments);
+commentsLoadButton.addEventListener('click', loadComments);
 
 export const clearCommentsList = () => {
   loadedCommentsCount = 0;

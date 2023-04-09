@@ -1,16 +1,17 @@
-import { body } from './modal.js';
+import { body } from './big-photo-modal.js';
 import { pristine, hashtagInput, descriptionInput } from './validation.js';
 import { setScale } from './scale.js';
-import { resetEffects } from './effects.js';
+import { resetEffects, sliderContainer } from './effects.js';
+import { isEscapeKey } from './util.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 export const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
-const imgEditing = imgUploadForm.querySelector('.img-upload__overlay');
+const imgUploadModal = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancel = imgUploadForm.querySelector('#upload-cancel');
 const submitButton = imgUploadForm.querySelector('.img-upload__submit');
-const preview = imgUploadForm.querySelector('.img-upload__preview img');
+const imgUploadPreview = imgUploadForm.querySelector('.img-upload__preview img');
 
 const isTextInputActive = () =>
   document.activeElement === hashtagInput ||
@@ -21,44 +22,39 @@ const setImgPreview = () => {
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((element) => fileName.endsWith(element));
   if(matches) {
-    preview.src = URL.createObjectURL(file);
+    imgUploadPreview.src = URL.createObjectURL(file);
   }
 };
 
-export const onImgEditingEscKeydown = (evt) => {
-  if(evt.key === 'Escape' && !isTextInputActive()) {
+export const onDocumentKeydown = (evt) => {
+  if(isEscapeKey && !isTextInputActive()) {
     evt.preventDefault();
-    imgEditing.classList.add('hidden');
-    body.classList.remove('modal-open');
-    imgUploadInput.value = '';
+    closeImgModal();
   }
 };
 
-export const closeImgEditing = () => {
-  imgEditing.classList.add('hidden');
+export function closeImgModal () {
+  imgUploadModal.classList.add('hidden');
   body.classList.remove('modal-open');
   imgUploadForm.reset();
+  hashtagInput.value = '';
+  descriptionInput.value = '';
   pristine.reset();
   resetEffects();
-  document.removeEventListener('keydown', onImgEditingEscKeydown);
-};
+}
 
-export const openImgEditing = () => {
-  imgEditing.classList.remove('hidden');
+export const openImgModal = () => {
+  imgUploadModal.classList.remove('hidden');
   body.classList.add('modal-open');
   setScale();
-  imgUploadForm.querySelector('.img-upload__effect-level').classList.add('visually-hidden');
-  document.addEventListener('keydown', onImgEditingEscKeydown);
   setImgPreview();
+  sliderContainer.classList.add('visually-hidden');
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
-export const blockSubmitButton = () => {
-  submitButton.disabled = true;
-};
+export const blockSubmitButton = () => submitButton.disabled === true;
 
-export const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-};
+export const unblockSubmitButton = () => submitButton.disabled === false;
 
 export const submitForm = (cb) => {
   imgUploadForm.addEventListener('submit', async (evt) => {
@@ -72,7 +68,5 @@ export const submitForm = (cb) => {
   });
 };
 
-imgUploadCancel.addEventListener('click', closeImgEditing);
-imgUploadInput.addEventListener('change', openImgEditing);
-
-
+imgUploadCancel.addEventListener('click', closeImgModal);
+imgUploadInput.addEventListener('change', openImgModal);

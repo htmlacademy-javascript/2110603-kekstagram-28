@@ -1,5 +1,3 @@
-// Slider
-
 const EFFECTS_DATA = [
   {
     name: 'none',
@@ -50,10 +48,11 @@ const EFFECTS_DATA = [
     unit: ''
   }
 ];
+
 const defaultData = EFFECTS_DATA[0];
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgPreview = imgUploadForm.querySelector('.img-upload__preview img');
-const sliderContainer = imgUploadForm.querySelector('.img-upload__effect-level');
+export const sliderContainer = imgUploadForm.querySelector('.img-upload__effect-level');
 const slider = sliderContainer.querySelector('.effect-level__slider');
 const effectLevelValue = sliderContainer.querySelector('.effect-level__value');
 const effectsContainer = imgUploadForm.querySelector('.img-upload__effects');
@@ -91,11 +90,9 @@ const sliderChange = () => {
     start: currentData.max,
     step: currentData.step
   });
-  if (currentData !== defaultData) {
-    showSlider();
-  } else {
-    hideSlider();
-  }
+  return (currentData !== defaultData)
+    ? showSlider()
+    : hideSlider();
 };
 
 const onPreviewEffectCreate = () => {
