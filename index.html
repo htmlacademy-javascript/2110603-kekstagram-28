@@ -35,7 +35,7 @@
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required>
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" accept="image/png, image/jpeg" required>
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -211,7 +211,7 @@
   <!-- Сообщение с ошибкой загрузки изображения -->
   <template id="error">
     <section class="error">
-      <div class="error__inner">
+      <div class="error__inner" aria-modal="true">
         <h2 class="error__title">Ошибка загрузки файла</h2>
         <button type="button" class="error__button">Попробовать ещё раз</button>
       </div>
@@ -221,7 +221,7 @@
   <!-- Сообщение об успешной загрузке изображения -->
   <template id="success">
     <section class="success">
-      <div class="success__inner">
+      <div class="success__inner" aria-modal="true">
         <h2 class="success__title">Изображение успешно загружено</h2>
         <button type="button" class="success__button">Круто!</button>
       </div>
@@ -243,6 +243,5 @@
   <script src="vendor/nouislider/nouislider.js" type="text/javascript"></script>
   <script src="vendor/pristine/pristine.min.js" type="text/javascript"></script>
   <script src="js/main.js" type="module"></script>
-
 </body>
 </html>
