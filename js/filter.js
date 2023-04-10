@@ -2,7 +2,7 @@ const RANDOM_PHOTOS_COUNT = 10;
 const Filter = {
   ORIGINAL: 'filter-default',
   RANDOM: 'filter-random',
-  DISCUSSED: 'filter-random'
+  DISCUSSED: 'filter-discussed'
 };
 
 const filtersButtonContainer = document.querySelector('.img-filters__form');
