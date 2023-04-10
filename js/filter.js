@@ -1,6 +1,12 @@
 const RANDOM_PHOTOS_COUNT = 10;
+const Filter = {
+  ORIGINAL: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-random'
+};
+
 const filtersButtonContainer = document.querySelector('.img-filters__form');
-let currentFilter = 'filter-default';
+let currentFilter = Filter.ORIGINAL;
 let photos = [];
 
 const randomSort = () => Math.random() - 0.5;
@@ -9,9 +15,9 @@ const byCommentsSort = (photoA, photoB) => photoB.comments.length - photoA.comme
 
 export const getSortedGallery = () => {
   switch(currentFilter) {
-    case 'filter-random'
+    case Filter.RANDOM
       :return photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT);
-    case 'filter-discussed'
+    case Filter.DISCUSSED
       :return photos.slice().sort(byCommentsSort);
     default:
       return photos;
