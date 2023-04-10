@@ -8,12 +8,13 @@ const randomSort = () => Math.random() - 0.5;
 const byCommentsSort = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
 export const getSortedGallery = () => {
-  if (currentFilter === 'filter-random') {
-    return photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT);
-  }else if(currentFilter === 'filter-discussed') {
-    return photos.slice().sort(byCommentsSort);
-  } else {
-    return photos;
+  switch(currentFilter) {
+    case 'filter-random'
+      :return photos.slice().sort(randomSort).slice(0, RANDOM_PHOTOS_COUNT);
+    case 'filter-discussed'
+      :return photos.slice().sort(byCommentsSort);
+    default:
+      return photos;
   }
 };
 
