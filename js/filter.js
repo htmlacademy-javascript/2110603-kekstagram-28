@@ -1,12 +1,12 @@
 const RANDOM_PHOTOS_COUNT = 10;
 const Filter = {
-  ORIGINAL: 'filter-default',
+  DEFAULT: 'filter-default',
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed'
 };
 
 const filtersButtonContainer = document.querySelector('.img-filters__form');
-let currentFilter = Filter.ORIGINAL;
+let currentFilter = Filter.DEFAULT;
 let photos = [];
 
 const randomSort = () => Math.random() - 0.5;

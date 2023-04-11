@@ -6,7 +6,7 @@ export const bigPhoto = document.querySelector('.big-picture');
 const bigPhotoCancelButton = bigPhoto.querySelector('.big-picture__cancel');
 
 const onModalEscKeydown = (evt) => {
-  if(isEscapeKey && bigPhoto.className !== 'hidden') {
+  if(isEscapeKey(evt) && bigPhoto.className !== 'hidden') {
     evt.preventDefault();
     closeModal();
   }
