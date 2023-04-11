@@ -27,7 +27,7 @@ const setImgPreview = () => {
 };
 
 export const onDocumentKeydown = (evt) => {
-  if(isEscapeKey && !isTextInputActive()) {
+  if(isEscapeKey(evt) && !isTextInputActive()) {
     evt.preventDefault();
     closeImgModal();
   }

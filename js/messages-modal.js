@@ -8,7 +8,7 @@ const messageContainer = document.querySelector('body');
 // Success
 
 const onDocumentKeydownSuccess = (evt) => {
-  if(isEscapeKey) {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeSuccessMessage();
   }
@@ -28,7 +28,7 @@ function closeSuccessMessage () {
 // Error
 
 const onDocumentKeydownError = (evt) => {
-  if(isEscapeKey) {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeErrorMessage();
   }
