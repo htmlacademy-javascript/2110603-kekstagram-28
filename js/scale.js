@@ -28,6 +28,7 @@ const onBiggerButtonClick = () => {
 
 export const setScale = () => {
   scaleValue.value = `${SCALE_DEFAULT}%`;
+  imgPreview.style.transform = `scale(${SCALE_DEFAULT / 100})`;
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
 };
