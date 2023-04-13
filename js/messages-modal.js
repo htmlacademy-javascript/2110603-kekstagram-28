@@ -46,7 +46,7 @@ function closeErrorMessage () {
   document.removeEventListener('keydown', onDocumentKeydownError);
 }
 
-function openMessage (template, type) {
+const openMessage = (template, type) => {
   document.removeEventListener('keydown', onDocumentKeydown);
   const message = template.cloneNode(true);
   messageContainer.appendChild(message);
@@ -62,7 +62,7 @@ function openMessage (template, type) {
       document.addEventListener('keydown', onDocumentKeydownError);
       break;
   }
-}
+};
 
 export const openSuccessMessage = () => openMessage(successMessageTemplate, 'success');
 
