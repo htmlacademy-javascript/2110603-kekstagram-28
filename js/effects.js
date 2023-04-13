@@ -78,6 +78,7 @@ noUiSlider.create(slider, {
   },
   start: defaultData.max,
   step: defaultData.step,
+  connect: 'lower'
 });
 hideSlider();
 

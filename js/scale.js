@@ -8,26 +8,27 @@ const biggerButton = scaleControl.querySelector('.scale__control--bigger');
 const scaleValue = scaleControl.querySelector('.scale__control--value');
 const imgPreview = document.querySelector('.img-upload__preview img');
 
-function onSmallerButtonClick () {
+const onSmallerButtonClick = () => {
   let newValue = parseInt(scaleValue.value, 10) - SCALE_STEP;
   if (newValue < SCALE_MIN) {
     newValue = SCALE_MIN;
   }
   scaleValue.value = `${newValue}%`;
   imgPreview.style.transform = `scale(${newValue / 100})`;
-}
+};
 
-function onBiggerButtonClick () {
+const onBiggerButtonClick = () => {
   let newValue = parseInt(scaleValue.value, 10) + SCALE_STEP;
   if (newValue > SCALE_MAX) {
     newValue = SCALE_MAX;
   }
   scaleValue.value = `${newValue}%`;
   imgPreview.style.transform = `scale(${newValue / 100})`;
-}
+};
 
 export const setScale = () => {
   scaleValue.value = `${SCALE_DEFAULT}%`;
+  imgPreview.style.transform = `scale(${SCALE_DEFAULT / 100})`;
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
 };
